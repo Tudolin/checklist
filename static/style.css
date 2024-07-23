@@ -1,0 +1,113 @@
+/* Estilo para o corpo */
+body, html {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+
+.navbar {
+    background-color: rgba(39, 65, 9, 0.671);
+    /* background-image: url('static/floresta.jpg'); */
+    margin-bottom: 20px;
+    border-radius: 0;
+    border: none;
+    padding: 10px 20px;
+}
+
+.footer {
+    background-color: rgba(39, 65, 9, 0.671);
+    /* background-image: url("static/floresta.jpg"); */
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    border-top: 300px solid #ffffff;
+    margin-top: auto;
+    width: 100%;
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo img {
+    transition: opacity 0.3s;
+}
+
+.footer-logo img:hover {
+    opacity: 0.8;
+}
+
+.footer-address {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.footer-rights {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Estilo para os cabeçalhos */
+h1, h2, h3  {
+    margin-top: 20px;
+    color: #1b8129;
+    font-weight: 300;
+    text-align: center;
+}
+
+/* Estilo para o container */
+.container {
+    padding-top: 20px;
+}
+
+/* Estilo para links dentro da navbar */
+.navbar a {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Ajustes de opacidade e cor */
+.navbar-nav > li > a {
+    color: #ffffff !important;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    color: #ffffff80 !important;
+    border-bottom: 2px solid rgb(0, 70, 0);
+    transform-origin: 0% 50%;
+}
+.navbar-nav > li > a::after, .navbar-nav > li > a:focus {
+    width: 100%;
+    transition: width .3s;
+}
+
+.navbar-brand {
+    color: #424242 !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Estilo para links */
+a {
+    color: #85e18b;
+}
+
+a:hover, a:focus {
+    color: #6cc573;
+    text-decoration: none;
+}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>{{ checklist.name if checklist else 'Novo Checklist' }}</h2>
+    <form method="POST" id="checklistForm">
+        <div class="form-group">
+            <label for="checklistName">Nome:</label>
+            <input type="text" id="checklistName" name="nome" class="form-control" value="{{ checklist['name'] if checklist else '' }}" oninput="updateChecklistName()">
+        </div>
+        <div class="form-group">
+            <label for="checklistDescription">Descrição:</label>
+            <input type="text" id="checklistDescription" name="descricao" class="form-control" value="{{ checklist['description'] if checklist else '' }}" oninput="updateChecklistDescription()">
+        </div>
+        <div id="areasContainer"></div>
+        <button type="button" class="btn btn-primary" id="addAreaButton">Criar Área</button>
+        <input type="hidden" name="items" id="itemsInput">
+        <input type="submit" class="btn btn-success" value="Salvar Checklist">
+    </form>
+</div>
+
+<!-- Modal for Item Configuration -->
+<div class="modal fade" id="itemConfigModal" tabindex="-1" aria-labelledby="itemConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="itemConfigModalLabel">Configurar Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="itemConfigForm">
+                    <div class="form-group">
+                        <label for="modalItemText">Texto do Item:</label>
+                        <input type="text" id="modalItemText" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalItemType">Tipo do Item:</label>
+                        <select id="modalItemType" class="form-control" onchange="updateItemType(this)">
+                            <option value="comentario">Comentário</option>
+                            <option value="conforme">Conforme ou Não Conforme</option>
+                            <option value="boolean">Sim ou Não</option>
+                            <option value="multipla">Seleção Múltipla</option>
+                            <option value="unica">Seleção Única</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalItemRequired">Obrigatório:</label>
+                        <input type="checkbox" id="modalItemRequired">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalItemWeight">Peso:</label>
+                        <input type="number" id="modalItemWeight" class="form-control" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalItemDependency">Dependência:</label>
+                        <select id="modalItemDependency" class="form-control">
+                            <option value="">Nenhuma</option>
+                            {% for area in checklist.areas %}
+                                {% for item in area.items %}
+                                    <option value="{{ item.itemId }}">{{ item.text }}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div id="additionalFields"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveItemConfig()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for SubItem Configuration -->
+<div class="modal fade" id="subItemConfigModal" tabindex="-1" aria-labelledby="subItemConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="subItemConfigModalLabel">Configurar SubItem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="subItemConfigForm">
+                    <div class="form-group">
+                        <label for="modalSubItemText">Texto do SubItem:</label>
+                        <input type="text" id="modalSubItemText" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalSubItemType">Tipo do SubItem:</label>
+                        <select id="modalSubItemType" class="form-control" onchange="updateItemType(this)">
+                            <option value="comentario">Comentário</option>
+                            <option value="conforme">Conforme ou Não Conforme</option>
+                            <option value="boolean">Sim ou Não</option>
+                            <option value="multipla">Seleção Múltipla</option>
+                            <option value="unica">Seleção Única</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalSubItemRequired">Obrigatório:</label>
+                        <input type="checkbox" id="modalSubItemRequired">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalSubItemWeight">Peso:</label>
+                        <input type="number" id="modalSubItemWeight" class="form-control" value="0">
+                    </div>
+                    <div id="subAdditionalFields"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveSubItemConfig()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    initializeChecklist({{ checklist | tojson if checklist else 'null' }});
+});
+</script>
+{% endblock %}

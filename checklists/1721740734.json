@@ -1,0 +1,12 @@
+{
+    "id": 1721740734,
+    "name": "teste",
+    "description": "checklist teste",
+    "areas": [
+        {
+            "areaId": 1,
+            "name": "Dados iniciais vistoria",
+            "items": []
+        }
+    ]
+}

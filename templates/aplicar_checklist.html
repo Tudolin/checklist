@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Aplicar Checklist</h2>
+<form method="POST">
+    {% for pergunta in perguntas %}
+    <label>{{ pergunta[1] }}</label>
+    <input type="text" name="respostas"><br>
+    {% endfor %}
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}

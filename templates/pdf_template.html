@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist PDF</title>
+</head>
+<body>
+    <h2>Checklist</h2>
+    <ul>
+        {% for pergunta, resposta in perguntas_respostas %}
+        <li>{{ pergunta }}: {{ resposta }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
